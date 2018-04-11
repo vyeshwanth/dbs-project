@@ -1,0 +1,13 @@
+{
+  "name": "dbs-project",
+  "version": "1.0.0",
+  "description": "Web application for booking IPL tickets",
+  "repository": "https://github.com/vyeshwanth/dbs-project.git",
+  "author": "dbs-group",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.1.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3"
+  }
+}
