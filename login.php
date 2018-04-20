@@ -12,7 +12,7 @@ $response = array();
 
 foreach ($params as $param_name => $param_value)
 {
-    if(!isset($_POST[$param_value]))
+    if(!isset($_POST[$param_value]) || empty($_POST[$param_value]))
     {
         $response['status'] = false;
         $response['message'] = $param_name . ' can\'t be empty';

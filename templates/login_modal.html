@@ -1,0 +1,28 @@
+<div class="modal fade" id="login-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Login</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" id="login-alert" style="display: none"></div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email-id">Email address</label>
+                        <input name="email_id" type="email" class="form-control" id="email-id" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary mx-auto" id="login-btn">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
