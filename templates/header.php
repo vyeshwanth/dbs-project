@@ -2,6 +2,7 @@
 include (__DIR__ . './../lib/User.php');
 
 session_start();
+
 if(!isset($title))
 {
     die('$title is not set');
@@ -30,7 +31,14 @@ if(!isset($title))
         <?php
         if(isset($_SESSION['user']))
         {
-            echo '<li class="nav-item"><a class="nav-link" href="profile.php">' . $_SESSION['user']->get_username() . '</a></li>';
+            echo '<li class="nav-item dropdown">';
+            echo '<a class="nav-link dropdown-toggle" id="profile-options-dropdown" href="#" data-toggle="dropdown">' . $_SESSION['user']->get_username() . '</a>';
+            echo '<div class="dropdown-menu">';
+            echo '<a class="dropdown-item" href="profile.php">Profile</a>';
+            echo '<a class="dropdown-item" href="bookings.php">Bookings</a>';
+            echo '<a class="dropdown-item" href="logout.php">Logout</a>';
+            echo '</div>';
+            echo '</li>';
         }
         else
         {
