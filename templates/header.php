@@ -1,6 +1,7 @@
 <?php
 include (__DIR__ . './../lib/User.php');
 
+session_start();
 if(!isset($title))
 {
     die('$title is not set');
@@ -27,7 +28,6 @@ if(!isset($title))
     </ul>
     <ul class="navbar-nav ml-auto">
         <?php
-        session_start();
         if(isset($_SESSION['user']))
         {
             echo '<li class="nav-item"><a class="nav-link" href="profile.php">' . $_SESSION['user']->get_username() . '</a></li>';
