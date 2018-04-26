@@ -18,6 +18,15 @@ if(!isset($title))
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css"  rel="stylesheet" />
+    <?php
+    if(isset($css_files))
+    {
+        foreach ($css_files as $css_file)
+        {
+            echo '<link href="'. $css_file .'" rel="stylesheet"/>';
+        }
+    }
+    ?>
     <title><?php echo $title ?></title>
 </head>
 <body>

@@ -1,0 +1,11 @@
+.game-card img
+{
+    height: 50px;
+    display: block;
+}
+.game-card h1
+{
+    text-align: center;
+    display: block;
+    margin-bottom: 0px;
+}
