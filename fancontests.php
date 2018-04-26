@@ -14,21 +14,20 @@ if(!$connection_status)
 }
 PageBuilder::add_header('BookYourTickets');
 
-$questions = Contest::getQuestions($db->get_connection());
+$questions = Contest::get_Questions($db->get_connection());
 ?>
+    <div class="alert alert-success" id="success" style="display: none"></div>
     <form class="container px-0" id="final_form">
         <h4 class="my-3">Questions</h4>
                 <?php
                 foreach ($questions as $question)
                 {
-                    PageBuilder::get_question_card($question['Question_id'], $question['Question'],$question['Option 1'],$question['Option 2']
+                    PageBuilder::get_question_card($question['Question_ID'], $question['Question'],$question['Option 1'],$question['Option 2']
                         ,$question['Option 3'],$question['Option 4']);
                 }
                 ?>
     </form>
-    <div class="form-group row">
-        <button type="button" class="btn btn-primary" id="submit-btn">Save</button>
-    </div>
+        <button type="button" class="btn btn-primary mx-auto" style="display: block" id="submit-btn">Save</button>
 <?php
 PageBuilder::add_footer();
 ?>

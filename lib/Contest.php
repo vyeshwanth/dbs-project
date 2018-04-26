@@ -26,6 +26,15 @@ class Contest
     {
         $sql = "SELECT Answer FROM question WHERE Question_ID = '$ques_id'";
         $result = $con->query($sql);
-        return $result;
+        while($row = $result->fetch_assoc())
+        {
+            return $row['Answer'];
+        }
+    }
+
+    public static function insertresult(mysqli $con,string $email_id,int $num)
+    {
+        $sql = "INSERT INTO contest_result values('$email_id','$num')";
+        $con->query($sql);
     }
 }

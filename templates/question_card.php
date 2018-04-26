@@ -3,19 +3,15 @@
         <h5><?php echo $question?></h5>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="<?php echo $que_id?>" id="inlineRadio1" value="<?php echo $option1?>">
-        <label class="form-check-label" for="inlineRadio1">1</label>
+        <input class="form-check-input" type="radio" name="<?php echo $que_id?>"  value="1"> <?php echo $option1?>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="<?php echo $que_id?>" id="inlineRadio2"  value="<?php echo $option2?>">
-        <label class="form-check-label" for="inlineRadio2">2</label>
+        <input class="form-check-input" type="radio" name="<?php echo $que_id?>"  value="2"> <?php echo $option2?>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="<?php echo $que_id?>" id="inlineRadio3"  value="<?php echo $option3?>">
-        <label class="form-check-label" for="inlineRadio3">3</label>
+        <input class="form-check-input" type="radio" name="<?php echo $que_id?>"  value="3"> <?php echo $option3?>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="<?php echo $que_id?>" id="inlineRadio4"  value='<?php echo $option4?>'>
-        <label class="form-check-label" for="inlineRadio3">4</label>
+        <input class="form-check-input" type="radio" name="<?php echo $que_id?>"  value="4"> <?php echo $option4?>
     </div>
     <hr>

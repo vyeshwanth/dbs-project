@@ -1,13 +1,13 @@
-$(document.ready(function () {
-    $('#submit-btn').click(function () {
-        var submitReq = $.ajax({
-            type: 'POST',
-            url : '.php',
-            data: $('#final_form').serialize(),
-            dataType: 'json'
-        });
-        submitReq.done(function (data) {
-
-        })
+$('#submit-btn').click(function () {
+    var submitReq = $.ajax({
+        type: 'POST',
+        url : 'ans_que.php',
+        data: $('#final_form').serialize(),
     });
-}));
+    submitReq.done(function (data) {
+        console.log(data);
+        var loginAlert = $('#success');
+        loginAlert.html("Score is "+data);
+        loginAlert.slideDown('fast');
+    })
+});

@@ -37,6 +37,6 @@ $book = Booking::getBooking($db->get_connection(),$em_id);
             $book1=new Booking($team1_id, $team2_id, $team1_name, $team2_name, $time, $venue_id, $venue_name, $venue_location,$booking_id,$user_id,$seating_type,$no_of_tickets,$bill_amount,$payment_type);
             PageBuilder::get_book_card($book1);
         }
-PageBuilder::add_footer();        
+PageBuilder::add_footer();
 ?>
 
