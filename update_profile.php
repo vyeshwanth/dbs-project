@@ -26,7 +26,7 @@ if(!isset($_SESSION['user']))
     die();
 }
 
-$params = array('Email Id' => 'email_id','First name' => 'first_name', 'Last name' => 'last_name','Old Password' => 'old_psw', 'New Password' => 'new_psw');
+$params = array('Email Id' => 'email_id','First name' => 'first_name', 'Last name' => 'last_name','Old Password' => 'old_psw');
 
 foreach ($params as $param_name => $param_value)
 {
@@ -38,8 +38,6 @@ foreach ($params as $param_name => $param_value)
         die();
     }
 }
-
-echo "Validationcompleted";
 
 $con = $db->get_connection();
 

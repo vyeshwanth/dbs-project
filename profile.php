@@ -13,8 +13,9 @@ PageBuilder::add_header('profile');
 
 ?>
 
-<div class="mx-auto col-sm-8" style="height: 1000px;">
-    <form class="my-auto" style="height: auto">
+<div class="mx-auto col-sm-8">
+    <form class="my-auto">
+        <div class="alert alert-danger" id="delete-alert" style="display: none"></div>
         <div class="form-group row">
             <label for="Input" class="col-sm-3 col-form-label">Email id</label>
             <div>
@@ -45,10 +46,15 @@ PageBuilder::add_header('profile');
                 <input type="password"  name = "newpsw" class="form-control" id="inputPassword2" placeholder="type password" autocomplete="off">
             </div>
         </div>
-        <div>
-            <button type="button" class="btn btn-primary" id="save-btn">save</button
+        <div class="form-group row">
+            <button type="button" class="btn btn-primary" id="save-btn">Save</button>
         </div>
     </form>
+</div>
+
+<br>
+<div>
+    <button type="button" class="btn btn-danger" style="margin-left: 100px;" id="delete-user-btn">Delete User</button>
 </div>
 
 <?php

@@ -138,29 +138,33 @@ class User
         $email_id = $con->real_escape_string($email_id);
         $oldpsw = md5($oldpsw);
         $newpsw = md5($newpsw);
-        if($up_firstname == null || $up_lastname == null)
+        if($newpsw == md5(''))
         {
-            $response['status'] = false;
-            $response['message'] = 'first name or last name of user can\'t be empty';
-            return $response;
+            $newpsw = $oldpsw;
         }
-
-        if($oldpsw == null || $newpsw == null)
-        {
-            $response['status'] = false;
-            $response['message'] = 'password\'s of user can\'t be empty';
-            return $response;
-        }
-
         if($oldpsw != $this->password) {
             $response['status'] = false;
-            $response['message'] = 'password\'s are not matching';
+            $response['message'] = 'Incorrect password entered';
             return $response;
         }
         $sql = "UPDATE user SET first_name = '$up_firstname',last_name = '$up_lastname',password = '$newpsw' WHERE email_id ='$email_id'";
         $con->query($sql);
+        $this->first_name = $up_firstname;
+        $this->last_name = $up_lastname;
+        $this->password = $newpsw;
         $response['status'] = true;
         $response['message'] = 'Profile Information Updated';
+        return $response;
+    }
+
+    function delete_profile(mysqli $con,string $email_id)
+    {
+        $response = array();
+        $email_id = $con->real_escape_string($email_id);
+        $sql  = "DELETE FROM user where email_id='$email_id'";
+        $con->query($sql);
+        $response['status'] = true;
+        $response['message'] = 'Profile Information Deleted';
         return $response;
     }
 }
