@@ -1,7 +1,10 @@
 <?php
-include (__DIR__ . './../lib/User.php');
+require_once(__DIR__ . './../lib/User.php');
 
-session_start();
+if(!isset($_SESSION))
+{
+    session_start();
+}
 
 if(!isset($title))
 {
