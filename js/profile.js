@@ -37,7 +37,7 @@ $(document).ready(function () {
         if(deletecount == 0)
         {
             var delete_alert = $('#delete-alert');
-            delete_alert.html("Please Confirm delete?");
+            delete_alert.html("Please Confirm delete? (Click delete button again)");
             delete_alert.slideDown('fast');
             deletecount = 1;
         }
