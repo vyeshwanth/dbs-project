@@ -6,6 +6,7 @@ $('#signup-btn').click(function () {
     sendSignupRequest();
 });
 
+
 function sendLoginRequest() {
     var loginForm = $('#login-form');
     var loginReq = $.ajax({

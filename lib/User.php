@@ -20,6 +20,26 @@ class User
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    function get_firstname()
+    {
+        return $this->first_name;
+    }
+
+    function get_lastname()
+    {
+        return $this->last_name;
+    }
+
+    function get_password()
+    {
+        return $this->password;
+    }
+
+    function get_emailid()
+    {
+        return $this->email_id;
+    }
+
     function add_user(mysqli $con)
     {
         $response = array();
@@ -106,5 +126,41 @@ class User
             $response['message'] = 'Authentication failed';
             return $response;
         }
+    }
+
+    function update_profile_info(mysqli $con,string $email_id,string $up_firstname,string $up_lastname,string $oldpsw,string $newpsw)
+    {
+        $response = array();
+        $up_firstname = $con->real_escape_string($up_firstname);
+        $up_lastname = $con->real_escape_string($up_lastname);
+        $oldpsw = $con->real_escape_string($oldpsw);
+        $newpsw = $con->real_escape_string($newpsw);
+        $email_id = $con->real_escape_string($email_id);
+        $oldpsw = md5($oldpsw);
+        $newpsw = md5($newpsw);
+        if($up_firstname == null || $up_lastname == null)
+        {
+            $response['status'] = false;
+            $response['message'] = 'first name or last name of user can\'t be empty';
+            return $response;
+        }
+
+        if($oldpsw == null || $newpsw == null)
+        {
+            $response['status'] = false;
+            $response['message'] = 'password\'s of user can\'t be empty';
+            return $response;
+        }
+
+        if($oldpsw != $this->password) {
+            $response['status'] = false;
+            $response['message'] = 'password\'s are not matching';
+            return $response;
+        }
+        $sql = "UPDATE user SET first_name = '$up_firstname',last_name = '$up_lastname',password = '$newpsw' WHERE email_id ='$email_id'";
+        $con->query($sql);
+        $response['status'] = true;
+        $response['message'] = 'Profile Information Updated';
+        return $response;
     }
 }
