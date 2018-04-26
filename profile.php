@@ -15,6 +15,8 @@ PageBuilder::add_header('profile');
 
 <div class="mx-auto col-sm-8">
     <form class="my-auto">
+        <div class="alert alert-danger" id="update-alert" style="display: none"></div>
+        <div class="alert alert-success" id="update-success" style="display: none"></div>
         <div class="alert alert-danger" id="delete-alert" style="display: none"></div>
         <div class="form-group row">
             <label for="Input" class="col-sm-3 col-form-label">Email id</label>

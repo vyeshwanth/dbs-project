@@ -21,4 +21,11 @@ class Contest
 
         return $Question_bank;
     }
+
+    public static function ansforque(mysqli $con,int $ques_id)
+    {
+        $sql = "SELECT Answer FROM question WHERE Question_ID = '$ques_id'";
+        $result = $con->query($sql);
+        return $result;
+    }
 }

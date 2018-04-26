@@ -1,12 +1,12 @@
 var deletecount = 0;
-var email_id = $('#Input').val();
-var first_name = $('#Input1').val();
-var last_name = $('#Input2').val();
-var old_psw = $('#inputPassword1').val();
-var new_psw = $('#inputPassword2').val();
 
 $(document).ready(function () {
     $('#save-btn').click(function () {
+        var email_id = $('#Input').val();
+        var first_name = $('#Input1').val();
+        var last_name = $('#Input2').val();
+        var old_psw = $('#inputPassword1').val();
+        var new_psw = $('#inputPassword2').val();
         var saveReq = $.ajax({
             type: 'POST',
             url : 'update_profile.php',
@@ -24,16 +24,22 @@ $(document).ready(function () {
             console.log(data.status);
             if(data.status == true)
             {
+                var update_success = $('#update-success');
+                update_success.html("Update Successful");
+                update_success.slideDown('fast');
                 location.reload();
             }
             else
             {
-                alert(data);
+                var update_alert = $('#update-alert');
+                update_alert.html(data.message);
+                update_alert.slideDown('fast');
             }
         });
     });
     
     $('#delete-user-btn').click(function () {
+        var email_id = $('#Input').val();
         if(deletecount == 0)
         {
             var delete_alert = $('#delete-alert');

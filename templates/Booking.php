@@ -62,7 +62,7 @@ class Booking{
         public function getPaymode()
     {
         return $this->payment_type;
-    }          
+    }
 	    public static function getBooking(mysqli $con,string $em_id){
 
 
@@ -72,7 +72,6 @@ class Booking{
 
         $result = $con->query($sql);
         return $result;
-       
     }
 }
 ?>

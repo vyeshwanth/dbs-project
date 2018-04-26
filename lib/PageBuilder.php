@@ -21,4 +21,9 @@ class PageBuilder
     {
         include (__DIR__ . '/./../templates/footer.php');
     }
+
+    public static function get_question_card(int $que_id, string $question,string $option1,string $option2,string $option3,string $option4)
+    {
+        include (__DIR__ . '/./../templates/question_card.php');
+    }
 }

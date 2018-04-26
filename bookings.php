@@ -6,6 +6,7 @@ require_once ('.\templates\Booking.php');
 require_once ('./lib/User.php');
 session_start();
 $em_id=$_SESSION['user']->get_emailid();
+
 $db = new Database($config);
 $connection_status = $db->connect();
 
@@ -15,6 +16,7 @@ if(!$connection_status)
 }
 
 PageBuilder::add_header('booking');
+
 $book = Booking::getBooking($db->get_connection(),$em_id);
         while ($row = $book->fetch_assoc())
         {
