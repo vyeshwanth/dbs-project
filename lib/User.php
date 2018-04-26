@@ -1,5 +1,7 @@
 <?php
 
+require_once ('Game.php');
+
 class User
 {
     private $email_id;
@@ -162,5 +164,26 @@ class User
         $response['status'] = true;
         $response['message'] = 'Profile Information Updated';
         return $response;
+    }
+
+    function book_tickets(mysqli $con, int $game_id, int $seating_id, int $no_of_tickets, int $billing_amount, int $payment_mode)
+    {
+        $response = array();
+
+        if(!Game::check_if_seats_available($con, $game_id, $seating_id, $no_of_tickets))
+        {
+            $response['status'] = false;
+            $response['message'] = 'Requested number of tickets are not available';
+            return $response;
+        }
+
+        $sql = "INSERT INTO booking values (null , '$game_id', '$this->email_id', '$seating_id', '$no_of_tickets', '$billing_amount', '$payment_mode')";
+
+        if($result = $con->query($sql))
+        {
+            $response['status'] = true;
+            $response['message'] = 'Tickets booked successfully';
+            return $response;
+        };
     }
 }

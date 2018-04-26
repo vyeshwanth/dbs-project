@@ -126,4 +126,50 @@ class Game
 
         return $game;
     }
+
+    public static function get_seating_types(mysqli $con)
+    {
+        $seating_types = array();
+        $sql = "SELECT * FROM seating_type";
+        $result = $con->query($sql);
+        while ($row = $result->fetch_assoc())
+        {
+            $seating_types[] = $row;
+        }
+        return $seating_types;
+    }
+
+    public static function get_payment_types(mysqli $con)
+    {
+        $payment_types = array();
+        $sql = "SELECT * FROM payment";
+        $result = $con->query($sql);
+        while ($row = $result->fetch_assoc())
+        {
+            $payment_types[] = $row;
+        }
+        return $payment_types;
+    }
+
+    public static function check_if_seats_available(mysqli $con, int $game_id, int $seating_id, int $no_of_tickets)
+    {
+        $sql = "select max_seats, sum(no_of_tickets) as tickets_booked from booking,seating_type where game_id = $game_id and seating_id=$seating_id and seating_type=seating_id group by(seating_id)";
+        $result = $con->query($sql);
+        if($result->num_rows == 0)
+        {
+            return true;
+        }
+        while ($row = $result->fetch_assoc())
+        {
+            if($row['max_seats'] - $row['tickets_booked'] > $no_of_tickets)
+            {
+                echo $row['max_seats'] - $row['tickets_booked'];
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 }
