@@ -51,15 +51,13 @@ class User
         $first_name = $con->real_escape_string($this->first_name);
         $last_name = $con->real_escape_string($this->last_name);
 
-        if($this->first_name == null || $this->last_name == null)
-        {
+        if ($this->first_name == null || $this->last_name == null) {
             $response['status'] = false;
             $response['message'] = 'first name or last name of user can\'t be empty';
             return $response;
         }
 
-        if($this->is_existing_user($con))
-        {
+        if ($this->is_existing_user($con)) {
             $response['status'] = false;
             $response['message'] = 'Email id is already registered';
             return $response;
@@ -68,14 +66,11 @@ class User
         $sql = "INSERT INTO user(email_id, password, first_name, last_name) VALUES ('$email_id', '$password', '$first_name', '$last_name')";
         $result = $con->query($sql);
 
-        if(!$result)
-        {
+        if (!$result) {
             $response['status'] = false;
             $response['message'] = 'User registration failed';
             return $response;
-        }
-        else
-        {
+        } else {
             $response['status'] = true;
             $response['message'] = 'User registration successful';
             return $response;
@@ -90,12 +85,9 @@ class User
 
         $result = $con->query($sql);
 
-        if($result->num_rows == 1)
-        {
+        if ($result->num_rows == 1) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
@@ -111,26 +103,22 @@ class User
 
         $result = $con->query($sql);
 
-        if($result->num_rows == 1)
-        {
-            while ($row = $result->fetch_assoc())
-            {
+        if ($result->num_rows == 1) {
+            while ($row = $result->fetch_assoc()) {
                 $this->first_name = $row['first_name'];
                 $this->last_name = $row['last_name'];
             }
             $response['status'] = true;
             $response['message'] = 'Authentication successful';
             return $response;
-        }
-        else
-        {
+        } else {
             $response['status'] = false;
             $response['message'] = 'Authentication failed';
             return $response;
         }
     }
 
-    function update_profile_info(mysqli $con,string $email_id,string $up_firstname,string $up_lastname,string $oldpsw,string $newpsw)
+    function update_profile_info(mysqli $con, string $email_id, string $up_firstname, string $up_lastname, string $oldpsw, string $newpsw)
     {
         $response = array();
         $up_firstname = $con->real_escape_string($up_firstname);
@@ -140,27 +128,19 @@ class User
         $email_id = $con->real_escape_string($email_id);
         $oldpsw = md5($oldpsw);
         $newpsw = md5($newpsw);
-        if($up_firstname == null || $up_lastname == null)
-        {
-            $response['status'] = false;
-            $response['message'] = 'first name or last name of user can\'t be empty';
-            return $response;
+        if ($newpsw == md5('')) {
+            $newpsw = $oldpsw;
         }
-
-        if($oldpsw == null || $newpsw == null)
-        {
+        if ($oldpsw != $this->password) {
             $response['status'] = false;
-            $response['message'] = 'password\'s of user can\'t be empty';
-            return $response;
-        }
-
-        if($oldpsw != $this->password) {
-            $response['status'] = false;
-            $response['message'] = 'password\'s are not matching';
+            $response['message'] = 'Incorrect password entered';
             return $response;
         }
         $sql = "UPDATE user SET first_name = '$up_firstname',last_name = '$up_lastname',password = '$newpsw' WHERE email_id ='$email_id'";
         $con->query($sql);
+        $this->first_name = $up_firstname;
+        $this->last_name = $up_lastname;
+        $this->password = $newpsw;
         $response['status'] = true;
         $response['message'] = 'Profile Information Updated';
         return $response;
@@ -170,8 +150,7 @@ class User
     {
         $response = array();
 
-        if(!Game::check_if_seats_available($con, $game_id, $seating_id, $no_of_tickets))
-        {
+        if (!Game::check_if_seats_available($con, $game_id, $seating_id, $no_of_tickets)) {
             $response['status'] = false;
             $response['message'] = 'Requested number of tickets are not available';
             return $response;
@@ -179,11 +158,21 @@ class User
 
         $sql = "INSERT INTO booking values (null , '$game_id', '$this->email_id', '$seating_id', '$no_of_tickets', '$billing_amount', '$payment_mode')";
 
-        if($result = $con->query($sql))
-        {
+        if ($result = $con->query($sql)) {
             $response['status'] = true;
             $response['message'] = 'Tickets booked successfully';
             return $response;
         };
+    }
+
+    function delete_profile(mysqli $con, string $email_id)
+    {
+        $response = array();
+        $email_id = $con->real_escape_string($email_id);
+        $sql = "DELETE FROM user where email_id='$email_id'";
+        $con->query($sql);
+        $response['status'] = true;
+        $response['message'] = 'Profile Information Deleted';
+        return $response;
     }
 }
