@@ -20,6 +20,26 @@ class User
         return $this->first_name . ' ' . $this->last_name;
     }
 
+    function get_firstname()
+    {
+        return $this->first_name;
+    }
+
+    function get_lastname()
+    {
+        return $this->last_name;
+    }
+
+    function get_password()
+    {
+        return $this->password;
+    }
+
+    function get_emailid()
+    {
+        return $this->email_id;
+    }
+
     function add_user(mysqli $con)
     {
         $response = array();

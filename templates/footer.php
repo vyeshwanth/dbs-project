@@ -6,6 +6,8 @@ if(!isset($_SESSION['user']))
     include (__DIR__ . '/signup_modal.html');
 }
 ?>
+<html>
+<body>
 <script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
 <script src="node_modules/popper.js/dist/popper.min.js" type="text/javascript"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
