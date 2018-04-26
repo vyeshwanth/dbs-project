@@ -3,7 +3,9 @@ require_once('./config/config.php');
 require_once ('./lib/Database.php');
 require_once ('./lib/PageBuilder.php');
 require_once ('.\templates\Booking.php');
-
+require_once ('./lib/User.php');
+session_start();
+$em_id=$_SESSION['user']->get_emailid();
 $db = new Database($config);
 $connection_status = $db->connect();
 
@@ -13,49 +15,26 @@ if(!$connection_status)
 }
 
 PageBuilder::add_header('booking');
-$book = Booking::getBooking($db->get_connection());
+$book = Booking::getBooking($db->get_connection(),$em_id);
+        while ($row = $book->fetch_assoc())
+        {
+            $team1_id = $row['team1'];
+            $team2_id = $row['team2'];
+            $team1_name = $row['team1_name'];
+            $team2_name = $row['team2_name'];
+            $time = $row['time'];
+            $venue_id = $row['venue_id'];
+            $venue_name = $row['venue_name'];
+            $venue_location = $row['location'];
+            $booking_id=$row['booking_id'];
+            $user_id=$row['user_id'];
+            $seating_type=$row['seating_name'];
+            $no_of_tickets=$row['no_of_tickets'];
+            $bill_amount=$row['bill_amount'];
+            $payment_type=$row['payment_mode'];
+            $book1=new Booking($team1_id, $team2_id, $team1_name, $team2_name, $time, $venue_id, $venue_name, $venue_location,$booking_id,$user_id,$seating_type,$no_of_tickets,$bill_amount,$payment_type);
+            PageBuilder::get_book_card($book1);
+        }
+PageBuilder::add_footer();        
+?>
 
-?>
-<table class="table table-bordered">
-    <thead>
-    <tr>
-        <th scope="col">Booking Details</th>
-    </tr>
-    </thead>
-   <tbody>
-    <tr>
-        <th scope="column">Booking Id</th>
-        <td><?php echo $book->getBookingId()?></td>
-    </tr>
-    <tr>
-        <th scope="column">Team 1</th>
-        <td><?php echo $book->getTeam1() ?></td>
-    <tr>
-        <th scope="column">Team2</th>
-        <td><?php echo $book->getTeam2() ?></td>
-    </tr>
-    <tr>
-        <th scope="column">Venue</th>
-        <td><?php echo $book->getVenue() ?></td>
-    </tr>
-    <tr>
-        <th scope="column">Venue Location</th>
-        <td><?php echo $book->getVenueLocation() ?></td>
-    </tr>
-    <tr>
-        <th scope="column">Seating</th>
-        <td><?php echo $book->getSeating() ?></td>
-    </tr>
-    <tr>
-        <th scope="column">No of Tickets</th>
-        <td><?php echo $book->getTickets() ?></td>
-    </tr>
-    <tr>
-        <th scope="column">Payment Mode</th>
-        <td><?php echo $book->getPaymode() ?></td>
-    </tr>
-    </tbody>    
-</table>
-<?php
-PageBuilder::add_footer();
-?>

@@ -13,7 +13,10 @@ class PageBuilder
     {
         include (__DIR__ . '/./../templates/game_card.php');
     }
-
+    public static function get_book_card($book)
+    {
+        include (__DIR__ . '/./../templates/book_card.php');
+    }
     public static function add_footer()
     {
         include (__DIR__ . '/./../templates/footer.php');
