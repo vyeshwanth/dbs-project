@@ -63,34 +63,16 @@ class Booking{
     {
         return $this->payment_type;
     }          
-	    public static function getBooking(mysqli $con){
+	    public static function getBooking(mysqli $con,string $em_id){
 
 
         $sql = "SELECT g.game_id, g.team1, g.team2, g.time, t1.team_name as team1_name, t2.team_name as team2_name, venue_id, venue_name, location,booking_id,user_id,s.seating_name,no_of_tickets,bill_amount,p.payment_mode 
         from game g, team t1, team t2,user, venue,booking b,seating_type s,payment p 
-        WHERE g.team1 = t1.team_id AND g.team2 = t2.team_id AND g.venue = venue.venue_id AND b.user_id=email_id AND b.seating_type=s.seating_id AND b.game_id=g.game_id AND b.payment_mode=p.payment_id";
+        WHERE g.team1 = t1.team_id AND g.team2 = t2.team_id AND g.venue = venue.venue_id AND b.user_id=email_id AND b.seating_type=s.seating_id AND b.game_id=g.game_id AND b.payment_mode=p.payment_id AND email_id='$em_id'";
 
         $result = $con->query($sql);
-        while ($row = $result->fetch_assoc())
-        {
-            $team1_id = $row['team1'];
-            $team2_id = $row['team2'];
-            $team1_name = $row['team1_name'];
-            $team2_name = $row['team2_name'];
-            $time = $row['time'];
-            $venue_id = $row['venue_id'];
-            $venue_name = $row['venue_name'];
-            $venue_location = $row['location'];
-            $booking_id=$row['booking_id'];
-            $user_id=$row['user_id'];
-            $seating_type=$row['seating_name'];
-            $no_of_tickets=$row['no_of_tickets'];
-            $bill_amount=$row['bill_amount'];
-            $payment_type=$row['payment_mode'];
-        }
-        $book=new Booking($team1_id, $team2_id, $team1_name, $team2_name, $time, $venue_id, $venue_name, $venue_location,$booking_id,$user_id,$seating_type,$no_of_tickets,$bill_amount,$payment_type);
-
-        return $book;        
+        return $result;
+       
     }
 }
 ?>
