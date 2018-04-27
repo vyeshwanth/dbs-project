@@ -169,10 +169,21 @@ class User
     {
         $response = array();
         $email_id = $con->real_escape_string($email_id);
-        $sql = "DELETE FROM user where email_id='$email_id'";
+        $sql = "DELETE FROM user WHERE email_id='$email_id'";
         $con->query($sql);
         $response['status'] = true;
         $response['message'] = 'Profile Information Deleted';
+        return $response;
+    }
+
+    function delete_bookings(mysqli $con, string $email_id)
+    {
+        $response = array();
+        $email_id = $con->real_escape_string($email_id);
+        $sql = "DELETE FROM booking WHERE user_id='$email_id'";
+        $con->query($sql);
+        $response['status'] = true;
+        $response['message'] = 'Profile Bookings Deleted';
         return $response;
     }
 }

@@ -56,9 +56,6 @@ $(document).ready(function () {
             var deleteReq = $.ajax({
                 type: 'POST',
                 url : 'delete_profile.php',
-                data: {
-                    "email_id" : email_id,
-                },
                 dataType: 'json'
             });
             deleteReq.done(function (data) {
