@@ -44,4 +44,11 @@ if(!isset($_SESSION['user']))
 
 $response = $_SESSION['user']->book_tickets($db->get_connection(), $_POST['game_id'], $_POST['seating_type'], $_POST['no_of_seats'], $_POST['billing_amount'], $_POST['payment_type']);
 
+if(isset($_POST['apply_coupon']))
+{
+    if($_POST['apply_coupon'] == 1)
+    {
+        $_SESSION['user']->apply_coupon($db->get_connection());
+    }
+}
 echo json_encode($response);

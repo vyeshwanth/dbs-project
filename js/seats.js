@@ -3,6 +3,15 @@ $('#no-of-seats').change(function () {
     $('#bill-amount').val(selectedSeatingPrice * $(this).val());
 });
 
+$('#apply-coupon').change(function () {
+   var couponApplied = $(this).is(':checked');
+   if(couponApplied) {
+       var selectedSeatingPrice = $('#seating-type option:selected').attr('data-seating-price');
+       var currentBill = $('#bill-amount').val();
+       $('#bill-amount').val(currentBill - selectedSeatingPrice);
+   }
+});
+
 $('#book-btn').click(function () {
     sendBookingRequest();
 });

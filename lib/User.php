@@ -206,4 +206,39 @@ class User
         $response['message'] = 'Profile Information Deleted';
         return $response;
     }
+
+    function check_coupons(mysqli $con)
+    {
+        $sql= "SELECT no_coupons from coupon where email_id = '$this->email_id'";
+        $result = $con->query($sql);
+        if($result->num_rows == 0)
+        {
+            return false;
+        }
+        else if($result->num_rows == 1)
+        {
+            while ($row = $result->fetch_assoc())
+            {
+                if($row['no_coupons'] >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function apply_coupon(mysqli $con)
+    {
+        $sql = "UPDATE coupon SET no_coupons = no_coupons - 1 where email_id = '$this->email_id'";
+        $con->query($sql);
+        return;
+    }
 }

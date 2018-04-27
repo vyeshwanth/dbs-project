@@ -96,6 +96,18 @@ $game = Game::getGame($db->get_connection(), $_GET['game']);
         <label for="bill-amount">Total Amount Payable</label>
         <input class="form-control" type="text" name="billing_amount" id="bill-amount" value="" readonly="readonly">
     </div>
+    <?php
+        if(isset($_SESSION['user']))
+        {
+           $coupons_available = $_SESSION['user']->check_coupons($db->get_connection());
+           if($coupons_available)
+           {
+               echo '<div class="form-check form-check-inline">';
+               echo '<input class="form-check-input" type="checkbox" name="apply_coupon" id="apply-coupon" value="1"> Apply Coupon' ;
+               echo '</div>';
+           }
+        }
+    ?>
     <input type="hidden" name="game_id" value="<?php echo $_GET['game']?>">
     <?php
     if(isset($_SESSION['user']))
