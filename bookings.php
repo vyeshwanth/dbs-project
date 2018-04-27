@@ -19,25 +19,31 @@ if(!$connection_status)
 PageBuilder::add_header('booking');
 
 $book = Booking::getBooking($db->get_connection(),$em_id);
-        while ($row = $book->fetch_assoc())
-        {
-            $team1_id = $row['team1'];
-            $team2_id = $row['team2'];
-            $team1_name = $row['team1_name'];
-            $team2_name = $row['team2_name'];
-            $time = $row['time'];
-            $venue_id = $row['venue_id'];
-            $venue_name = $row['venue_name'];
-            $venue_location = $row['location'];
-            $booking_id=$row['booking_id'];
-            $user_id=$row['user_id'];
-            $seating_type=$row['seating_name'];
-            $no_of_tickets=$row['no_of_tickets'];
-            $bill_amount=$row['bill_amount'];
-            $payment_type=$row['payment_mode'];
-            $book1=new Booking($team1_id, $team2_id, $team1_name, $team2_name, $time, $venue_id, $venue_name, $venue_location,$booking_id,$user_id,$seating_type,$no_of_tickets,$bill_amount,$payment_type);
-            PageBuilder::get_book_card($book1);
-        }
+
+echo '<div class="alert" id="cancel-booking-alert" style="display: none"></div>';
+echo '<h5 class="my-3">Booking Details</h5>';
+
+while ($row = $book->fetch_assoc())
+{
+    $team1_id = $row['team1'];
+    $team2_id = $row['team2'];
+    $team1_name = $row['team1_name'];
+    $team2_name = $row['team2_name'];
+    $time = $row['time'];
+    $venue_id = $row['venue_id'];
+    $venue_name = $row['venue_name'];
+    $venue_location = $row['location'];
+    $booking_id=$row['booking_id'];
+    $user_id=$row['user_id'];
+    $seating_type=$row['seating_name'];
+    $no_of_tickets=$row['no_of_tickets'];
+    $bill_amount=$row['bill_amount'];
+    $payment_type=$row['payment_mode'];
+    $book1=new Booking($team1_id, $team2_id, $team1_name, $team2_name, $time, $venue_id, $venue_name, $venue_location,$booking_id,$user_id,$seating_type,$no_of_tickets,$bill_amount,$payment_type);
+    PageBuilder::get_book_card($book1);
+}
+
 PageBuilder::add_footer();
 ?>
 
+<script src="js/bookings.js" type="text/javascript"></script>

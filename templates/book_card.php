@@ -1,20 +1,14 @@
 <table class="table table-bordered">
     <thead>
     <tr>
-        <th scope="col">Booking Details</th>
+        <th scope="column">Booking Id</th>
+        <th class="booking-id"><?php echo $book->getBookingId()?></th>
     </tr>
     </thead>
    <tbody>
     <tr>
-        <th scope="column">Booking Id</th>
-        <td><?php echo $book->getBookingId()?></td>
-    </tr>
-    <tr>
-        <th scope="column">Team 1</th>
-        <td><?php echo $book->getTeam1() ?></td>
-    <tr>
-        <th scope="column">Team2</th>
-        <td><?php echo $book->getTeam2() ?></td>
+        <th scope="column">Match</th>
+        <td><?php echo $book->getTeam1() . 'VS' . $book->getTeam2()?></td>
     </tr>
     <tr>
         <th scope="column">Venue</th>
@@ -36,5 +30,8 @@
         <th scope="column">Payment Mode</th>
         <td><?php echo $book->getPaymode() ?></td>
     </tr>
-    </tbody>    
+    <tr>
+        <th scope="column" colspan="2"><button class="btn btn-danger cancel-booking-btn" data-booking-id="<?php echo $book->getBookingId(); ?>">Cancel Booking</button></th>
+    </tr>
+    </tbody>
 </table>

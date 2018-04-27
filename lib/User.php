@@ -186,4 +186,14 @@ class User
         $response['message'] = 'Profile Bookings Deleted';
         return $response;
     }
+
+    function cancel_booking(mysqli $con, int $booking_id)
+    {
+        $response = array();
+        $sql = "DELETE FROM booking WHERE user_id='$this->email_id' and booking_id = '$booking_id'";
+        $con->query($sql);
+        $response['status'] = true;
+        $response['message'] = 'Booking cancelled successfully';
+        return $response;
+    }
 }
