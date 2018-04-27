@@ -2,8 +2,9 @@
 require_once('./config/config.php');
 require_once ('./lib/Database.php');
 require_once ('./lib/PageBuilder.php');
-require_once ('.\templates\Booking.php');
+require_once ('./templates/Booking.php');
 require_once ('./lib/User.php');
+
 session_start();
 $em_id=$_SESSION['user']->get_emailid();
 
