@@ -9,7 +9,6 @@ if(!isset($_SESSION))
     session_start();
 }
 
-$email_id = $_SESSION['user']->get_emailid();
 
 $response = array();
 
@@ -31,7 +30,9 @@ if(!isset($_SESSION['user']))
     die();
 }
 
-$correctans=0;
+$email_id = $_SESSION['user']->get_emailid();
+
+$correct_ans=0;
 
 $con = $db->get_connection();
 
@@ -39,8 +40,15 @@ foreach ($_POST as $que_id=>$ans)
 {
     if(Contest::ansforque($con,$que_id) == $ans)
     {
-        $correctans++;
+        $correct_ans++;
     }
 }
-echo $correctans;
-Contest::insertresult($con,$email_id,$correctans);
+
+Contest::insertresult($con,$email_id,$correct_ans);
+
+if($correct_ans == 5)
+{
+    Contest::insert_coupon($con,$email_id);
+}
+
+echo $correct_ans;

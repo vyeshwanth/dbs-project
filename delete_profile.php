@@ -31,6 +31,7 @@ if(!isset($_SESSION['user']))
 
 
 $con = $db->get_connection();
+$_SESSION['user']->delete_coupons($con,$_SESSION['user']->get_emailid());
 $_SESSION['user']->delete_bookings($con,$_SESSION['user']->get_emailid());
 $response = $_SESSION['user']->delete_profile($con,$_SESSION['user']->get_emailid());
 if(isset($_SESSION['user']))

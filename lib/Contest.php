@@ -37,4 +37,22 @@ class Contest
         $sql = "INSERT INTO contest_result values('$email_id','$num')";
         $con->query($sql);
     }
+
+    public static function insert_coupon(mysqli $con,string $email_id)
+    {
+        $sql = "SELECT email_id FROM coupon WHERE email_id='$email_id'";
+        $result = $con->query($sql);
+        if($result->num_rows == 0)
+        {
+            $sql1 = "INSERT INTO coupon values('$email_id','1')";
+            $con->query($sql1);
+            return;
+        }
+        else if($result->num_rows == 1)
+        {
+            $sql2 = "UPDATE coupon SET no_coupons = no_coupons+1 WHERE email_id='$email_id'";
+            $con->query($sql2);
+            return;
+        }
+    }
 }

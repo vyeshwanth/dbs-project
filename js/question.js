@@ -6,8 +6,17 @@ $('#submit-btn').click(function () {
     });
     submitReq.done(function (data) {
         console.log(data);
-        var loginAlert = $('#success');
-        loginAlert.html("Score is "+data);
-        loginAlert.slideDown('fast');
+        if(data < 5)
+        {
+            var submissionAlert = $('#success');
+            submissionAlert.html("Score is "+data);
+            submissionAlert.slideDown('fast');
+        }
+        else
+        {
+            var successalert = $('#coupon');
+            successalert.html("Yayy!!you got a coupon");
+            successalert.slideDown('fast');
+        }
     })
 });

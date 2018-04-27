@@ -186,7 +186,7 @@ class User
         $response['message'] = 'Profile Bookings Deleted';
         return $response;
     }
-
+    
     function cancel_booking(mysqli $con, int $booking_id)
     {
         $response = array();
@@ -194,6 +194,16 @@ class User
         $con->query($sql);
         $response['status'] = true;
         $response['message'] = 'Booking cancelled successfully';
+        return $response;
+    }
+    function delete_coupons(mysqli $con, string $email_id)
+    {
+        $response = array();
+        $email_id = $con->real_escape_string($email_id);
+        $sql = "DELETE FROM coupon WHERE email_id='$email_id'";
+        $con->query($sql);
+        $response['status'] = true;
+        $response['message'] = 'Profile Information Deleted';
         return $response;
     }
 }
